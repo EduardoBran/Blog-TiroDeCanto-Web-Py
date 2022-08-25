@@ -1,91 +1,28 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-    <a class="navbar-brand" href="{% url 'filmes:index' %}">EbFilmes</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav" style="padding-left: 10px;">
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'filmes:projetos' %}">
-                    Outros Projetos
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link active" href="{% url 'filmes:sobre' %}">
-                    Sobre
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Ordernar por...
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'filmes:index' %}">Nome</a>
-                    <a class="dropdown-item" href="{% url 'filmes:index_data_antigo' %}">Data (Antigos)</a>
-                    <a class="dropdown-item" href="{% url 'filmes:index_data_novo' %}">Data (Novos)</a>
-                    <!-- <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Outras coisas...</a> -->
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Categorias
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {% for categoria in categorias %}
-
-                    <a class="dropdown-item" href="{% url 'filmes:categoria' categoria.nome_cat %}" name="buscar">
+<!--_nav.html-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'postsapp:index' %}">Blog TiroDeCanto</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                {% for categoria in categorias %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'postsapp:post_categoria' categoria.nome_cat %}">
                         {{ categoria.nome_cat }}
                     </a>
-
-                    {% endfor %}
-                </div>
-            </li>
-        </ul>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive" style="margin-right: 128px;">
-            <ul class="navbar-nav dropdown">
-
-                {% if request.user.is_authenticated %}
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Conta
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <span class="dropdown-item"><strong>Olá, <i>{{ request.user }}</i></strong></span>
-                        <div class="linha"></div>
-                        <a class="dropdown-item" href="{% url 'perfil:logout' %}">Sair</a>
-                        <!-- <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Outras coisas...</a> -->
-                    </div>
                 </li>
-
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'perfil:login' %}">
-                        <button class="btn btn-warning btn-sm"
-                            style="width: 70px; font-size: 17px;"><strong>Login</strong></button>
-                    </a>
-                </li>
-                {% endif %}
+                {% endfor %}
             </ul>
-
-
+            <form class="form-inline my-2 my-lg-0 ml-lg-4" action="{% url 'postsapp:post_busca' %}">
+                <input name="termo" value="{{ request.GET.termo }}" class="form-control mr-sm-2" type="search"
+                    placeholder="Pesquisar" aria-label="Search">
+            </form>
         </div>
     </div>
 </nav>
-
-
-
-<!-- <div class="dropdown-divider"></div>
-<a class="dropdown-item" href="#"SAdicionar FOR</a> -->
+<!--/_nav.html-->
