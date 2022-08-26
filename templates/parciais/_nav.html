@@ -1,28 +1,134 @@
-{% load static %}
+<!--Main Navigation-->
 
-<!--_nav.html-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+<style>
+    .dropdown-toggle::after {
+        content: none;
+    }
+
+    .fundo {
+        background-color: #343a40;
+    }
+
+    .fundo2 {
+        background-color: #f0f1f3;
+    }
+
+    .tamanho {
+        width: 50px;
+    }
+
+    .links {
+        color: #C0C0C0;
+    }
+
+    .footer-links a:active,
+    .footer-links a:focus,
+    .footer-links a:hover {
+        color: #3366cc;
+        text-decoration: none;
+    }
+
+    #into-jumbotron {
+        background: #159957;
+        /* fallback for old browsers */
+        background: -webkit-linear-gradient(to bottom,
+                #283041,
+                #0f1420);
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to bottom,
+                #283041,
+                #0f1420);
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
+    @media (max-width: 991.98px) {
+        #into-jumbotron .border-right {
+            border: none !important;
+        }
+    }
+</style>
+
+<!-- Jumbotron -->
+<div class="p-4 fundo border-bottom">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'postsapp:index' %}">Blog TiroDeCanto</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                {% for categoria in categorias %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'postsapp:post_categoria' categoria.nome_cat %}">
-                        {{ categoria.nome_cat }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-            <form class="form-inline my-2 my-lg-0 ml-lg-4" action="{% url 'postsapp:post_busca' %}">
-                <input name="termo" value="{{ request.GET.termo }}" class="form-control mr-sm-2" type="search"
-                    placeholder="Pesquisar" aria-label="Search">
-            </form>
+        <div class="row">
+            <div class="col-md-3 d-flex justiy-content-md-start mb-3 mb-md-0">
+                <a href="/">
+                    <img src="https://i.postimg.cc/TPZkbFkd/logotdc.jpg" height="35" />
+                </a>
+            </div>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <div class="col-md-5">
+                <form class="d-flex input-group mb-3 mb-md-0" action="{% url 'postsapp:post_busca' %}">
+                    <input name="termo" value="{{ request.GET.termo }}" type="search" class="form-control rounded"
+                        placeholder="Buscar..." aria-label="Search" />&nbsp;
+                    <button class="input-group-text border-0 d-none d-lg-flex">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div class="col-md-3 d-flex justify-content-end justify-content-md-end align-items-center
+                 align-items-md-center">
+                <div class="d-flex">
+                    <!-- Social Icons -->
+                    <div class="me-3">
+                        <a href="#" class="text-reset instagram">
+                            <i class="fab fa-instagram fa-lg links"></i></a>&nbsp;&nbsp;&nbsp;
+                        <a href="#" class="text-reset twitter">
+                            <i class="fa fa-twitter fa-lg links"></i></a>&nbsp;&nbsp;&nbsp;
+                        <a href="#" class="text-reset envelope">
+                            <i class="fa fa-envelope fa-lg links"></i></a>
+                    </div>
+                    <!-- Social Icons -->
+                </div>
+            </div>
+
         </div>
     </div>
+</div>
+<!-- Jumbotron -->
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light fundo2" style="margin-top: 5px;">
+    <!-- Container wrapper -->
+    <div class="mx-auto text-center">
+        <!-- Left links -->
+        <ul class="navbar-nav flex-row" style="padding-right: 5px;">
+            <li class="nav-item me-2 me-lg-0 dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown" data-toggle="dropdown"
+                    data-mdb-toggle="sidenav" data-mdb-target="#sidenav-1" class="btn shadow-0 p-0 me-3"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bars me-1"></i>&nbsp;
+                    <span>Categorias&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for categoria in categorias %}
+
+                    <a class="dropdown-item" href="{% url 'postsapp:post_categoria' categoria.nome_cat %}"
+                        name="buscar">
+                        {{ categoria.nome_cat }}
+                    </a>
+
+                    {% endfor %}
+                </div>
+            </li>
+            <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+                <a class="nav-link" href="#">Home&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </li>
+            <li class="nav-item me-2 me-lg-0">
+                <a class="nav-link" href="#">Sobre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </li>
+            <li class="nav-item me-2 me-lg-0">
+                <a class="nav-link" href="#">Contato</a>
+            </li>
+        </ul>
+        <!-- Left links -->
+    </div>
+    <!-- Container wrapper -->
 </nav>
-<!--/_nav.html-->
+<!-- Navbar -->
+
+<!--Main Navigation-->
