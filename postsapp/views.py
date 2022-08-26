@@ -1,4 +1,5 @@
 from categorias.models import Categoria
+from comentarios.forms import FormComentario
 from django.db.models import Case, Count, Q, When
 from django.shortcuts import render
 from django.views.generic.edit import UpdateView
@@ -67,3 +68,11 @@ class PostCategoria(PostIndex):
         qs = qs.filter(categoria_post__nome_cat__iexact=categoria)
         
         return qs
+
+
+class PostDetalhes(UpdateView):
+    template_name = 'postsapp/post_detalhes.html'
+    model = Post
+    form_class = FormComentario
+    context_object_name = 'post'
+
