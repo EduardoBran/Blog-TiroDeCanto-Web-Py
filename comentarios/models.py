@@ -11,4 +11,4 @@ class Comentario(models.Model):
     post_comentario = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='Post')
     usuario_comentario = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Usuário', blank=True, null=True)
     data_comentario = models.DateTimeField(default=timezone.now, verbose_name='Data')
-    publicacao_comentario = models.BooleanField(default=False, verbose_name='Publicar')
+    publicacao_comentario = models.BooleanField(default=True, verbose_name='Publicar')

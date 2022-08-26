@@ -1,7 +1,8 @@
 from categorias.models import Categoria
 from comentarios.forms import FormComentario
+from comentarios.models import Comentario
 from django.db.models import Case, Count, Q, When
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
 
@@ -75,4 +76,26 @@ class PostDetalhes(UpdateView):
     model = Post
     form_class = FormComentario
     context_object_name = 'post'
-
+    
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
+        
+        post = self.get_object()
+        comentarios = Comentario.objects.filter(publicacao_comentario=True,
+                                                post_comentario=post.id
+                                                )
+        contexto['comentarios'] = comentarios
+        
+        return contexto
+    
+    def form_valid(self, form):
+        post = self.get_object()
+                
+        comentario = Comentario(**form.cleaned_data)
+        comentario.post_comentario = post
+        
+        if self.request.user.is_authenticated:
+            comentario.usuario_comentario = self.request.user
+        
+        return redirect('postsapp:post_detalhes', pk=post.id)
+        
