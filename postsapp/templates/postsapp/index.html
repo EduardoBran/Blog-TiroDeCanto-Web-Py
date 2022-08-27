@@ -4,50 +4,53 @@
 {% block content %}
 
 <!-- adicionar condicao para caso não ache nenhum post -->
+<div class="card" style="background-color: #F5FFFA;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- CONTENT -->
+                <div class="card-columns mt-4">
+                    {% for post in posts %}
+                    <div class="card">
 
-<div class="row">
-    <div class="col-lg-12">
-        <!-- CONTENT -->
-        <div class="card-columns mt-4">
-            {% for post in posts %}
-            <div class="card">
-
-                {% if post.imagem_post %}
-                <a href="{% url 'postsapp:post_detalhes' post.id %}">
-                    <img class="card-img-top" src="{{ post.imagem_post }}" alt="{{ post.titulo_post }}" width="50px"
-                        height="250px">
-                </a>
-                {% endif %}
-
-                <div class="card-body">
-                    <h5 class="card-title">
+                        {% if post.imagem_post %}
                         <a href="{% url 'postsapp:post_detalhes' post.id %}">
-                            {{ post.titulo_post }}
+                            <img class="card-img-top" src="{{ post.imagem_post }}" alt="{{ post.titulo_post }}"
+                                width="50px" height="250px">
                         </a>
-                    </h5>
-                    <p class="card-text">{{ post.excerto_post}}</p>
-                    <p class="card-text">
-                        <small class="text-muted">
-                            {{ post.data_post|naturalday|title }}
-                            |
-                            {{ post.numero_comentarios }} comentário(s)
-                            |
-                            {{ post.categoria_post }}</small>
-                    </p>
+                        {% endif %}
 
-                    <div class="text-right">
-                        <a href="{% url 'postsapp:post_detalhes' post.id %}" class="btn btn-outline-secondary">
-                            Ler mais...
-                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{% url 'postsapp:post_detalhes' post.id %}">
+                                    {{ post.titulo_post }}
+                                </a>
+                            </h5>
+                            <p class="card-text">{{ post.excerto_post}}</p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    {{ post.data_post|naturalday|title }}
+                                    |
+                                    {{ post.numero_comentarios }} comentário(s)
+                                    |
+                                    {{ post.categoria_post }}</small>
+                            </p>
+
+                            <div class="text-right">
+                                <a href="{% url 'postsapp:post_detalhes' post.id %}" class="btn btn-outline-secondary">
+                                    Ler mais...
+                                </a>
+                            </div>
+                        </div>
                     </div>
+                    {% endfor %}
                 </div>
-            </div>
-            {% endfor %}
-        </div>
-        <!--/CONTENT-->
-        {% include 'parciais/_pagination.html' %}
+                <!--/CONTENT-->
+                {% include 'parciais/_pagination.html' %}
 
+            </div>
+        </div>
     </div>
 </div>
-
+<br>
 {% endblock %}
