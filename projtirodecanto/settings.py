@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'postsapp',
     'categorias',
-    'comentarios'
+    'comentarios',
+    'main'
 ]
 
 MIDDLEWARE = [
