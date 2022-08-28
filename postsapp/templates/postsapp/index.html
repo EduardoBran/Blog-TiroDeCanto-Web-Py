@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load humanize %}
 
+{% block nav %}
+{% include 'parciais/_nav.html' %}
+{% endblock %}
+
 {% block content %}
 
 <!-- adicionar condicao para caso não ache nenhum post -->
