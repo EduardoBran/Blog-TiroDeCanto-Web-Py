@@ -1,11 +1,37 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block nav %}
 {% include 'parciais/_navMain.html' %}
 {% endblock %}
 
 {% block content %}
 
-CONTATO
+<style>
+    .sobre {
+        margin-right: 10px;
+        margin-left: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 15px;
+    }
+</style>
 
+{% include 'parciais/_messages.html' %}
+<div class="card shadow border sobre">
+    <h3 class="text-center">Enviar e-mail</h3>
+    <br>
+    <form action="{% url 'main:contato' %}" method="POST" class="form">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-dark">Enviar</button>
+    </form>
+</div>
+<br>
+<div style="margin-bottom: 10px;">
+    <a class="btn btn-secondary btn-lg" href="/">Início</a>
+</div>
+<br>
 {% endblock %}
