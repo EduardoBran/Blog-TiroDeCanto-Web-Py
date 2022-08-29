@@ -1,6 +1,7 @@
 asgiref==3.5.2
 bleach==5.0.1
 Django==4.1
+django-crispy-forms==1.14.0
 django-summernote==0.8.20.0
 python-dotenv==0.20.0
 six==1.16.0
