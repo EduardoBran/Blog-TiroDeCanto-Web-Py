@@ -54,7 +54,10 @@ class PostBusca(PostIndex):
             Q(categoria_post__nome_cat__iexact=termo)
         )
         
-        messages.success(self.request, f'Buscando pela(s) palavra(s): "{termo}"')
+        if qs.count() >= 1 :
+            messages.success(self.request, f'Buscando pela(s) palavra(s): "{termo}"')
+        else:
+            messages.warning(self.request, f'Não foi encontrado nenhum post relacionado através da busca realizada: "{termo}"')
         
         return qs
 
