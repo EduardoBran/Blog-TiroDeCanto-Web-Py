@@ -72,7 +72,10 @@ class PostCategoria(PostIndex):
         
         qs = qs.filter(categoria_post__nome_cat__iexact=categoria)
         
-        messages.success(self.request, f'Buscando posts pela categoria: "{categoria}"')
+        if qs.count() >= 1 :
+            messages.success(self.request, f'Buscando posts pela categoria: "{categoria}"')
+        else:
+            messages.warning(self.request, f'Ainda não temos nenhum post cadastrado na categoria: "{categoria}"')
         
         return qs
 
