@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block nav %}
+{% include 'parciais/_nav.html' %}
+{% endblock %}
+
 {% block content %}
 
 <!-- POST -->
@@ -67,8 +71,11 @@
                             {{ form }}
                             <tr>
                                 <td colspan="2">
-                                    {% include 'parciais/_messages.html' %}
-                                    <input id="envia_comentario" type="submit" class="btn btn-primary" value="Enviar">
+                                    <div class="text-center">
+                                        {% include 'parciais/_messages.html' %}
+                                    </div>
+                                    <input id="envia_comentario" type="submit" class="btn btn-primary" value="Enviar"
+                                        style="margin-top: 5px;">
                                 </td>
                             </tr>
                         </table>

@@ -1,6 +1,7 @@
 from categorias.models import Categoria
 from comentarios.forms import FormComentario
 from comentarios.models import Comentario
+from django.contrib import messages
 from django.db.models import Case, Count, Q, When
 from django.shortcuts import redirect, render
 from django.views.generic.edit import UpdateView
@@ -42,6 +43,7 @@ class PostBusca(PostIndex):
         termo = self.request.GET.get('termo')
         
         if not termo:
+            messages.warning(self.request, f'Não foi digitada nenhuma palavra para busca.')
             return qs
         
         qs = qs.filter(
@@ -51,6 +53,8 @@ class PostBusca(PostIndex):
             Q(excerto_post__icontains=termo) |
             Q(categoria_post__nome_cat__iexact=termo)
         )
+        
+        messages.success(self.request, f'Buscando pela(s) palavra(s): "{termo}"')
         
         return qs
 
@@ -68,10 +72,12 @@ class PostCategoria(PostIndex):
         
         qs = qs.filter(categoria_post__nome_cat__iexact=categoria)
         
+        messages.success(self.request, f'Buscando posts pela categoria: "{categoria}"')
+        
         return qs
 
 
-class PostDetalhes(UpdateView):
+class PostDetalhes(UpdateView, PostIndex):
     template_name = 'postsapp/post_detalhes.html'
     model = Post
     form_class = FormComentario
@@ -97,5 +103,6 @@ class PostDetalhes(UpdateView):
         if self.request.user.is_authenticated:
             comentario.usuario_comentario = self.request.user
         
+        comentario.save()
+        messages.success(self.request, f'Seu comentário foi enviado com sucesso.')
         return redirect('postsapp:post_detalhes', pk=post.id)
-        
