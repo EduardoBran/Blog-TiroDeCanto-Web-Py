@@ -2,6 +2,8 @@
 
 {% block titulo %}{{ post.titulo_post }} |{% endblock %}
 
+{% load crispy_forms_tags %}
+
 {% block nav %}
 {% include 'parciais/_nav.html' %}
 {% endblock %}
@@ -9,6 +11,7 @@
 {% block content %}
 
 <!-- POST -->
+
 <div class="row">
     <div class="col-lg-12">
         <div class="container">
@@ -21,7 +24,9 @@
                         <small>
                             {{ post.autor_post }} |
                             {{ post.data_post }} |
-                            {{ post.categoria_post }}
+                            <a class="text-muted mt-4" href="{% url 'postsapp:post_categoria' post.categoria_post %}">
+                                {{ post.categoria_post }}
+                            </a>
                         </small>
                     </p>
                 </div>
@@ -33,15 +38,18 @@
                 <div class="col-xl-8">
 
                     {% if post.imagem_post %}
-                    <img class="img-fluid pb-5 " src="{{ post.imagem_post }}" alt="{{ post.titulo_post }}">
+                    <img class="img-fluid pb-5" src="{{ post.imagem_post }}" alt="{{ post.titulo_post }}">
                     {% endif %}
 
-                    {{ post.conteudo_post|safe }}
-
+                    <div class="img-fluid">
+                        {{ post.conteudo_post|safe }}
+                    </div>
 
                 </div>
                 <div class="col-xl"></div>
             </div>
+            <br><br>
+            <hr />
             {% if comentarios %}
             <div class="row pt-5">
                 <div class="col-xl"></div>
@@ -70,7 +78,7 @@
                     <form method="POST" action="#envia_comentario">
                         {% csrf_token %}
                         <table class="table">
-                            {{ form }}
+                            {{ form|crispy }}
                             <tr>
                                 <td colspan="2">
                                     <div class="text-center">
@@ -83,12 +91,20 @@
                         </table>
                     </form>
 
+
                 </div>
                 <div class="col-xl"></div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- POST -->
 
+<hr />
+<br>
+<div class="text-center" style="margin-bottom: 10px;">
+    <a class="btn btn-secondary btn-lg" href="/">Início</a>
+</div>
+<br>
 {% endblock %}
