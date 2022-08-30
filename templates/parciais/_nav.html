@@ -1,3 +1,4 @@
+{% load static %}
 <!--Main Navigation-->
 
 <style>
@@ -75,11 +76,13 @@
                 <div class="d-flex">
                     <!-- Social Icons -->
                     <div class="me-3">
-                        <a href="#" class="text-reset instagram">
+                        <a href="https://www.instagram.com/thiagofreixo/" class="text-reset instagram" target="_blank"
+                            rel="noopener noreferrer">
                             <i class="fab fa-instagram fa-lg links"></i></a>&nbsp;&nbsp;&nbsp;
-                        <a href="#" class="text-reset twitter">
+                        <a href="https://twitter.com/thiagofreixo?s=21&t=e61CHacWDBcUn67_YIvg9w"
+                            class="text-reset twitter" target="_blank" rel="noopener noreferrer">
                             <i class="fa fa-twitter fa-lg links"></i></a>&nbsp;&nbsp;&nbsp;
-                        <a href="#" class="text-reset envelope">
+                        <a href="{% url 'main:contato' %}" class="text-reset envelope">
                             <i class="fa fa-envelope fa-lg links"></i></a>
                     </div>
                     <!-- Social Icons -->
