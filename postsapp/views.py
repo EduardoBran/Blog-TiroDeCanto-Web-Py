@@ -19,6 +19,8 @@ class PostIndex(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categorias'] = Categoria.objects.all()
+        context['termo'] = self.request.GET.get('termo')
+        context['categoria'] = self.kwargs.get('categoria', None)
         return context
     
     def get_queryset(self):
