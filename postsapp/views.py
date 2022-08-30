@@ -56,8 +56,10 @@ class PostBusca(PostIndex):
             Q(categoria_post__nome_cat__iexact=termo)
         )
         
-        if qs.count() >= 1 :
-            messages.success(self.request, f'Buscando pela(s) palavra(s): "{termo}"')
+        qtd_post = qs.count()
+        
+        if qtd_post >= 1 :
+            messages.success(self.request, f'Encontramos {qtd_post} posts com o termo solicitado: "{termo}"')
         else:
             messages.warning(self.request, f'Não foi encontrado nenhum post relacionado através da busca realizada: "{termo}"')
         
@@ -77,8 +79,10 @@ class PostCategoria(PostIndex):
         
         qs = qs.filter(categoria_post__nome_cat__iexact=categoria)
         
-        if qs.count() >= 1 :
-            messages.success(self.request, f'Buscando posts pela categoria: "{categoria}"')
+        qtd_post = qs.count()
+        
+        if qtd_post >= 1 :
+            messages.success(self.request, f'Encontramos {qtd_post} posts na categoria: "{categoria}"')
         else:
             messages.warning(self.request, f'Ainda não temos nenhum post cadastrado na categoria: "{categoria}"')
         
